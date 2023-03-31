@@ -4,15 +4,23 @@
 #include "USDScriptingWrappers.h"
 
 
-FUsdScriptingStage::FUsdScriptingStage()
+FUsdScriptingStage::FUsdScriptingStage() : InternalStage(UE::FUsdStage())
 {
 }
 
-FUsdScriptingStage::FUsdScriptingStage(UE::FUsdStage InStage): InternalStage(InStage)
+FUsdScriptingStage::FUsdScriptingStage(UE::FUsdStage InStage) : InternalStage(InStage)
 {
 }
 
-FUsdScriptingPrim::FUsdScriptingPrim()
+FUsdScriptingLayer::FUsdScriptingLayer() : InternalLayer(UE::FSdfLayer())
+{
+}
+
+FUsdScriptingLayer::FUsdScriptingLayer(UE::FSdfLayer InLayer) : InternalLayer(InLayer)
+{
+}
+
+FUsdScriptingPrim::FUsdScriptingPrim() : InternalPrim(UE::FUsdPrim())
 {
 }
 

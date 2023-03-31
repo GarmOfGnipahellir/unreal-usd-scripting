@@ -6,6 +6,7 @@
 #include "USDScriptingBPLibrary.generated.h"
 
 struct FUsdScriptingStage;
+struct FUsdScriptingLayer;
 struct FUsdScriptingPrim;
 
 /* 
@@ -35,14 +36,41 @@ public:
 	static FUsdScriptingStage NewStage();
 
 	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
+	static FUsdScriptingStage StageOpenLayer(FUsdScriptingLayer Layer);
+
+	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
+	static FUsdScriptingLayer GetRootLayer(FUsdScriptingStage Stage);
+
+	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
 	static bool ExportFlattened(FUsdScriptingStage Stage, const FString& FilePath);
 
 	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
-	static FUsdScriptingPrim DefinePrim(FUsdScriptingStage Stage, const FString& PrimPath, const FString& PrimType);
+	static FUsdScriptingPrim DefinePrim(
+		FUsdScriptingStage Stage,
+		const FString& PrimPath,
+		const FString& PrimType = "");
 
 	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
 	static void SetDefaultPrim(FUsdScriptingStage Stage, FUsdScriptingPrim Prim);
 
+	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
+	static FUsdScriptingLayer LayerCreateNew(const FString& Identifier);
+
+	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
+	static FString GetLayerIdentifier(FUsdScriptingLayer Layer);
+
+	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
+	static bool LayerSave(FUsdScriptingLayer Layer);
+
+	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
+	static bool ConvertXformable(FUsdScriptingPrim Prim, const FTransform& Transform);
+
 	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
 	static bool ConvertStaticMesh(FUsdScriptingPrim Prim, const UStaticMesh* StaticMesh);
+
+	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
+	static void AddReference(FUsdScriptingPrim Prim, const FString& AbsoluteFilePath);
+
+	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
+	static void AddPayload(FUsdScriptingPrim Prim, const FString& AbsoluteFilePath);
 };

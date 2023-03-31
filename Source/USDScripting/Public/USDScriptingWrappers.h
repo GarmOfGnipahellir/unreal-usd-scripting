@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UsdWrappers/SdfLayer.h"
 #include "UsdWrappers/UsdPrim.h"
 #include "UsdWrappers/UsdStage.h"
 #include "USDScriptingWrappers.generated.h"
@@ -16,6 +17,17 @@ struct USDSCRIPTING_API FUsdScriptingStage
 
 	FUsdScriptingStage();
 	explicit FUsdScriptingStage(UE::FUsdStage InStage);
+};
+
+USTRUCT(BlueprintType)
+struct USDSCRIPTING_API FUsdScriptingLayer
+{
+	GENERATED_BODY()
+
+	UE::FSdfLayer InternalLayer;
+
+	FUsdScriptingLayer();
+	explicit FUsdScriptingLayer(UE::FSdfLayer InLayer);
 };
 
 USTRUCT(BlueprintType)
