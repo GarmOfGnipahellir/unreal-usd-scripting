@@ -8,6 +8,17 @@
 #include "UsdWrappers/UsdStage.h"
 #include "USDScriptingWrappers.generated.h"
 
+UENUM(BlueprintType)
+enum class EUsdScriptingKind : uint8
+{
+	None,
+	Model,
+	Component,
+	Group,
+	Assembly,
+	Subcomponent
+};
+
 USTRUCT(BlueprintType)
 struct USDSCRIPTING_API FUsdScriptingStage
 {

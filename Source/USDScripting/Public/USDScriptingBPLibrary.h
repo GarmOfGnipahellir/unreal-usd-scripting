@@ -5,6 +5,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "USDScriptingBPLibrary.generated.h"
 
+enum class EUsdDefaultKind;
+enum class EUsdScriptingKind:uint8;
 struct FUsdScriptingStage;
 struct FUsdScriptingLayer;
 struct FUsdScriptingPrim;
@@ -73,4 +75,9 @@ public:
 
 	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
 	static void AddPayload(FUsdScriptingPrim Prim, const FString& AbsoluteFilePath);
+
+	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
+	static bool SetKind(FUsdScriptingPrim Prim, EUsdScriptingKind Kind);
+
+	static EUsdDefaultKind ConvertKind(EUsdScriptingKind Kind);
 };

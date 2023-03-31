@@ -80,3 +80,28 @@ void UUSDScriptingBPLibrary::AddPayload(FUsdScriptingPrim Prim, const FString& A
 {
 	UsdUtils::AddPayload(Prim.InternalPrim, *AbsoluteFilePath);
 }
+
+bool UUSDScriptingBPLibrary::SetKind(FUsdScriptingPrim Prim, EUsdScriptingKind Kind)
+{
+	return UsdUtils::SetDefaultKind(Prim.InternalPrim, ConvertKind(Kind));
+}
+
+EUsdDefaultKind UUSDScriptingBPLibrary::ConvertKind(EUsdScriptingKind Kind)
+{
+	switch (Kind)
+	{
+	default:
+	case EUsdScriptingKind::None:
+		return EUsdDefaultKind::None;
+	case EUsdScriptingKind::Model:
+		return EUsdDefaultKind::Model;
+	case EUsdScriptingKind::Component:
+		return EUsdDefaultKind::Component;
+	case EUsdScriptingKind::Group:
+		return EUsdDefaultKind::Group;
+	case EUsdScriptingKind::Assembly:
+		return EUsdDefaultKind::Assembly;
+	case EUsdScriptingKind::Subcomponent:
+		return EUsdDefaultKind::Subcomponent;
+	}
+}
