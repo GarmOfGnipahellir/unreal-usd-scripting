@@ -54,7 +54,10 @@ public:
 
 	UFUNCTION(Category="USD Scripting|Stage", BlueprintCallable)
 	static void SetDefaultPrim(FUsdScriptingStage Stage, FUsdScriptingPrim Prim);
-
+	
+	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
+	static FUsdScriptingLayer LayerFindOrOpen(const FString& Identifier, bool& bSuccess);
+	
 	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
 	static FUsdScriptingLayer LayerCreateNew(const FString& Identifier);
 
@@ -62,7 +65,10 @@ public:
 	static FString GetLayerIdentifier(FUsdScriptingLayer Layer);
 
 	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
-	static bool LayerSave(FUsdScriptingLayer Layer);
+	static void LayerClear(FUsdScriptingLayer Layer);
+
+	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
+	static bool LayerSave(FUsdScriptingLayer Layer, bool bForce = false);
 
 	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
 	static bool ConvertXformable(FUsdScriptingPrim Prim, const FTransform& Transform);

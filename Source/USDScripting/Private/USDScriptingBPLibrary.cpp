@@ -45,6 +45,13 @@ void UUSDScriptingBPLibrary::SetDefaultPrim(FUsdScriptingStage Stage, FUsdScript
 	Stage.InternalStage.SetDefaultPrim(Prim.InternalPrim);
 }
 
+FUsdScriptingLayer UUSDScriptingBPLibrary::LayerFindOrOpen(const FString& Identifier, bool& bSuccess)
+{
+	UE::FSdfLayer Layer = UE::FSdfLayer::FindOrOpen(*Identifier);
+	bSuccess = (bool)Layer;
+	return FUsdScriptingLayer(Layer);
+}
+
 FUsdScriptingLayer UUSDScriptingBPLibrary::LayerCreateNew(const FString& Identifier)
 {
 	return FUsdScriptingLayer(UE::FSdfLayer::CreateNew(*Identifier));
@@ -55,9 +62,14 @@ FString UUSDScriptingBPLibrary::GetLayerIdentifier(FUsdScriptingLayer Layer)
 	return Layer.InternalLayer.GetIdentifier();
 }
 
-bool UUSDScriptingBPLibrary::LayerSave(FUsdScriptingLayer Layer)
+void UUSDScriptingBPLibrary::LayerClear(FUsdScriptingLayer Layer)
 {
-	return Layer.InternalLayer.Save();
+	Layer.InternalLayer.Clear();
+}
+
+bool UUSDScriptingBPLibrary::LayerSave(FUsdScriptingLayer Layer, bool bForce)
+{
+	return Layer.InternalLayer.Save(bForce);
 }
 
 bool UUSDScriptingBPLibrary::ConvertXformable(FUsdScriptingPrim Prim, const FTransform& Transform)
