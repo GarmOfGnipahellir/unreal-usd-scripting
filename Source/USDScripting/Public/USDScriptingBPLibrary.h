@@ -5,6 +5,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "USDScriptingBPLibrary.generated.h"
 
+class UDirectionalLightComponent;
 enum class EUsdDefaultKind;
 enum class EUsdScriptingKind:uint8;
 struct FUsdScriptingStage;
@@ -69,6 +70,9 @@ public:
 
 	UFUNCTION(Category="USD Scripting|Layer", BlueprintCallable)
 	static bool LayerSave(FUsdScriptingLayer Layer, bool bForce = false);
+
+	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
+	static bool ConvertDirectionalLightComponent(FUsdScriptingPrim Prim, const UDirectionalLightComponent* DirectionalLightComponent);
 
 	UFUNCTION(Category="USD Scripting|Prim", BlueprintCallable)
 	static bool ConvertXformable(FUsdScriptingPrim Prim, const FTransform& Transform);

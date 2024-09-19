@@ -8,6 +8,15 @@
 #include "UsdWrappers/UsdStage.h"
 #include "USDScriptingWrappers.generated.h"
 
+#define USD_SCRIPTING_WRAPPER(WrappedType, WrapperIdent) \
+		WrappedType Internal; \
+\
+		WrapperIdent() : Internal(WrappedType()) {} \
+		explicit WrapperIdent(WrappedType InInternal) : Internal(InInternal) {} \
+\
+		WrappedType & operator*() { return Internal; } \
+		WrappedType * operator->() { return &Internal; }
+
 UENUM(BlueprintType)
 enum class EUsdScriptingKind : uint8
 {
@@ -24,10 +33,7 @@ struct USDSCRIPTING_API FUsdScriptingStage
 {
 	GENERATED_BODY()
 
-	UE::FUsdStage InternalStage;
-
-	FUsdScriptingStage();
-	explicit FUsdScriptingStage(UE::FUsdStage InStage);
+	USD_SCRIPTING_WRAPPER(UE::FUsdStage, FUsdScriptingStage)
 };
 
 USTRUCT(BlueprintType)
@@ -35,10 +41,7 @@ struct USDSCRIPTING_API FUsdScriptingLayer
 {
 	GENERATED_BODY()
 
-	UE::FSdfLayer InternalLayer;
-
-	FUsdScriptingLayer();
-	explicit FUsdScriptingLayer(UE::FSdfLayer InLayer);
+	USD_SCRIPTING_WRAPPER(UE::FSdfLayer, FUsdScriptingLayer)
 };
 
 USTRUCT(BlueprintType)
@@ -46,8 +49,5 @@ struct USDSCRIPTING_API FUsdScriptingPrim
 {
 	GENERATED_BODY()
 
-	UE::FUsdPrim InternalPrim;
-
-	FUsdScriptingPrim();
-	explicit FUsdScriptingPrim(UE::FUsdPrim InPrim);
+	USD_SCRIPTING_WRAPPER(UE::FUsdPrim, FUsdScriptingPrim)
 };

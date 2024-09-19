@@ -28,6 +28,7 @@ public class USDScripting : ModuleRules
 			new string[]
 			{
 				"Core",
+				"Boost",
 				"UnrealUSDWrapper",
 				"USDUtilities",
 				// ... add other public dependencies that you statically link with here ...
